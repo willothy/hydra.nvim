@@ -39,6 +39,24 @@ local default_config = {
   },
 }
 
+local hydras = {}
+
+vim.api.nvim_create_user_command(
+  "Hydra",
+  vim.schedule_wrap(function(args)
+    local hydra = hydras[args.fargs[1]]
+    if hydra then
+      hydra:activate()
+    end
+  end),
+  {
+    nargs = 1,
+    complete = function(line, args)
+      return vim.tbl_keys(hydras)
+    end,
+  }
+)
+
 ---@param input table
 function Hydra:initialize(input)
   do -- validate parameters
@@ -335,6 +353,8 @@ function Hydra:initialize(input)
   else -- color == 'pink'
     self:_setup_pink_hydra()
   end
+
+  hydras[self.name:lower()] = self
 end
 
 function Hydra:_setup_hydra_keymaps()
