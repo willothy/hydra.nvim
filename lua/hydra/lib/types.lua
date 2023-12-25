@@ -4,7 +4,7 @@
 
 ---@class hydra.Config
 ---@field debug boolean
----@field desc string
+---@field desc? string
 ---@field buffer? integer
 ---@field exit boolean
 ---@field foreign_keys hydra.foreign_keys
@@ -17,11 +17,11 @@
 ---@field hint hydra.hint.Config | false
 
 ---@class hydra.hint.Config
----@field type 'statusline' | 'cmdline' | 'window'
+---@field type? 'statusline' | 'cmdline' | 'window'
 ---@field position hydra.hint.Config.position
 ---@field offset integer
 ---@field border? string | table
----@field funcs table<string, fun():string>
+---@field funcs? table<string, fun():string>
 ---@field show_name boolean
 
 ---@class hydra.hint.Config.position
